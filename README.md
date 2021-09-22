@@ -2,10 +2,8 @@
 
 ![](https://github.com/firetools/blenderfds/wiki/images/logo.png)
 
-This is the repository of verification tools for *BlenderFDS*.
+This is the repository of verification tools for *BlenderFDS*. Find the main repository at [BlenderFDS repo](https://github.com/firetools/blenderfds).
 
-Find the main BlenderFDS repository at [BlenderFDS repo](https://github.com/firetools/blenderfds).
-
-## How to verify BlenderFDS code
+## How to verify code
 
 Run the `verify.py` script. The outcome of the tests is written into the `results` directory.
