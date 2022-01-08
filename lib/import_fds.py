@@ -58,31 +58,7 @@ def import_fds_case(package, filepath):
         # Export fds file
         fds_filepath = os.path.join(tmppath, sc.name + "_tmp.fds")
         try:
-            bpy.ops.export_scene.fds(all_scenes=False, filepath=fds_filepath)
-        except Exception as err:
-            results.append(TestFail(package, name, err))
-        else:
-            results.append(TestOk(package, name))
-
-    return results
-
-
-def export_scene_to_fds_case(
-    package, expected_exception=None, expected_msg=None
-):  # FIXME unfinished
-    results = list()
-    context = bpy.context
-    sc = context.scene
-    name = f"export scene <{sc.name}>"
-    with tempfile.TemporaryDirectory() as tmppath:
-        # Save tmp blend file to set bpy.data.filepath
-        bl_filepath = os.path.join(tmppath, sc.name + "_tmp.blend")
-
-        bpy.ops.wm.save_as_mainfile(filepath=bl_filepath)
-        # Export fds file
-        fds_filepath = os.path.join(tmppath, sc.name + "_tmp.fds")
-        try:
-            bpy.ops.export_scene.fds(all_scenes=False, filepath=fds_filepath)
+            sc.to_fds(context, full=True, filepath=fds_filepath)
         except Exception as err:
             results.append(TestFail(package, name, err))
         else:
