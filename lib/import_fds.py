@@ -98,11 +98,11 @@ def import_fds_tree(package, path, exclude_dirs=None, exclude_files=None):
     results = list()
     if not os.path.isdir(path):
         raise TestException(f"<{path}> is not a directory")
-    for p, _, files in os.walk(path):  # recursive, sends filename
+    for p, dirs, files in os.walk(path):  # recursive, sends filename
         # Exclude dirs
-        dirname = os.path.basename(p)
-        if exclude_dirs and dirname in exclude_dirs:
-            continue
+        # https://stackoverflow.com/questions/19859840/excluding-directories-in-os-walk
+        if exclude_dirs:
+            dirs[:] = [d for d in dirs if d not in exclude_dirs]
         # Loop on files
         for filename in files:
             if filename.endswith(".fds"):
