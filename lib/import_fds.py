@@ -60,7 +60,7 @@ def import_fds_case(package, filepath):
         try:
             sc.to_fds(context, full=True, filepath=fds_filepath)
         except Exception as err:
-            results.append(TestFail(package, name, err))
+            results.append(TestFail(package, name, str(err)))
         else:
             results.append(TestOk(package, name))
 
