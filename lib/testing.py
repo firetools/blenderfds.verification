@@ -1,5 +1,6 @@
 from typing import List, Tuple
-from . import bcolors, import_mod
+from . import import_mod
+from .bcolors import HEADER, ENDC, OKGREEN, FAIL
 
 
 def run_tests(test_py_module, requested_test_names=None):
@@ -7,12 +8,12 @@ def run_tests(test_py_module, requested_test_names=None):
     Execute tests from test_py_module.
     """
     tests = import_mod.import_submodules(test_py_module, recursive=False)
-    print(f"{bcolors.HEADER}Available tests:{bcolors.ENDC}")
+    print(f"{HEADER}Available tests:{ENDC}")
     print("  " + "\n  ".join(tests))
-    print(f"{bcolors.HEADER}Requested tests:{bcolors.ENDC}")
+    print(f"{HEADER}Requested tests:{ENDC}")
     print("  " + "\n  ".join(requested_test_names or ("all",)))
     # Run
-    print(f"{bcolors.HEADER}Run tests...{bcolors.ENDC}")
+    print(f"{HEADER}Run tests...{ENDC}")
     results = list()
     for key, item in tests.items():  # FIXME improve test selection (regex?)
         if requested_test_names and key.split(".")[1] not in requested_test_names:
@@ -36,19 +37,20 @@ def run_tests(test_py_module, requested_test_names=None):
             packages[r.package][1].append(r)
     # Repeat failed
     for key, value in packages.items():
-        print(f"\n{bcolors.HEADER}Detailed failures of <{key}>:{bcolors.ENDC}")
+        print(f"\n{HEADER}Detailed failures of <{key}>:{ENDC}")
         if not value[1]:
             print("None")
         else:
             for r in value[1]:
                 print(r.detail)
     # Results
-    print(f"\n{bcolors.HEADER}Overall test results:{bcolors.ENDC}")
+    print(f"\n{HEADER}Overall test results:{ENDC}")
     for key, value in packages.items():
         nok = len(value[0])
         nfail = len(value[1])
+        ntot = nfail + nok
         print(
-            f"{nfail+nok:>8} = {bcolors.OKGREEN}{nok:>6} ok{bcolors.ENDC} + {bcolors.FAIL}{nfail:>6} failed{bcolors.ENDC} in {key}"
+            f"{ntot:>8} = {OKGREEN}{nok:>6} ok{ENDC} + {FAIL}{nfail:>6} failed{ENDC} in {key}"
         )
     print(f"{len(results):>8} completed")
 
@@ -71,12 +73,12 @@ class _TestResult:
 
 class TestOk(_TestResult):
     def __str__(self):
-        return f"{bcolors.OKGREEN}{self.label}{bcolors.ENDC}"
+        return f"{OKGREEN}{self.label}{ENDC}"
 
 
 class TestFail(_TestResult):
     def __str__(self):
-        return f"{bcolors.FAIL}{self.label}{bcolors.ENDC}"
+        return f"{FAIL}{self.label}{ENDC}"
 
 
 class TestException(Exception):
