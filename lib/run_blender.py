@@ -1,9 +1,8 @@
 import subprocess, sys
-from . import bcolors
 
 
 def _first_run(script_pathfile, blender_pathfile):
-    print(f"{bcolors.HEADER}Run Blender...{bcolors.ENDC}")
+    print("Run Blender...")
     # Prepare process
     process = [
         blender_pathfile,
@@ -23,11 +22,9 @@ def _first_run(script_pathfile, blender_pathfile):
             # timeout=3600,
         )
     except subprocess.CalledProcessError as err:
-        print(f"{bcolors.FAIL}Blender error.{bcolors.ENDC}\n{err}")
-        exit(1)
+        raise err
     # Exit here when first run is finished
     # otherwise main would run again
-    print(f"{bcolors.HEADER}\nBlender end.{bcolors.ENDC}")
     exit(0)
 
 
