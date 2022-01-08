@@ -5,7 +5,7 @@
 &HEAD CHID='voxels_solid_indexes' TITLE='Test voxel indexes' /
 &TIME T_END=1.0 /
  
-! --- Geometric namelists from Blender Collection <Master Collection>
+! --- Geometric namelists from Blender Collection <Scene Collection>
 &OBST ID='Cube_index_0' SURF_ID='INERT'
       XB=0.799990,0.850010,0.899990,0.950010,-0.000010,0.050010 /
 &OBST ID='Cube_index_1' SURF_ID='INERT'

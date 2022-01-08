@@ -8,7 +8,7 @@
 ! --- Boundary conditions from related Blender Materials
 &SURF ID='Material' RGB=91,204,120 /
  
-! --- Geometric namelists from Blender Collection <Master Collection>
+! --- Geometric namelists from Blender Collection <Scene Collection>
 ! MESH Cell Size: 0.100 m, 0.100 m, 0.100 m | Qty: 10400 | Aspect: 1.0 | Poisson: Yes
 &MESH ID='Domain.001' IJK=26,20,20
       XB=-1.300000,1.300000,-1.000000,1.000000,-0.400000,1.600000 /

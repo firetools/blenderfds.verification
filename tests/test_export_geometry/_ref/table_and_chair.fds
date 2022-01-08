@@ -5,7 +5,7 @@
 &HEAD CHID='table_and_chair' TITLE='This is an example case' /
 &TIME T_END=1.0 /
  
-! --- Geometric namelists from Blender Collection <Master Collection>
+! --- Geometric namelists from Blender Collection <Scene Collection>
 ! --- Geometric namelists from Blender Collection <Domain>
 ! PB* Planes: 5
 &VENT ID='BCs_0' PBX=-5.144509 SURF_ID='OPEN' /

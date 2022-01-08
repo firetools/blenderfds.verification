@@ -5,7 +5,7 @@
 &HEAD CHID='vertices_modifiers' TITLE='Test voxels of solid w modifiers' /
 &TIME T_END=1.0 /
  
-! --- Geometric namelists from Blender Collection <Master Collection>
+! --- Geometric namelists from Blender Collection <Scene Collection>
 ! XYZ Vertices: 16
 &DEVC ID='Cube_x-0.588_y+0.323_z-0.211' XYZ=-0.588160,0.322788,-0.211215
       QUANTITY='TEMPERATURE' /

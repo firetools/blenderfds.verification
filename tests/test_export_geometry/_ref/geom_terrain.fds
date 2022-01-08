@@ -9,7 +9,7 @@
 &SURF ID='Material_blue' RGB=0,16,204 /
 &SURF ID='Material_red' RGB=255,0,0 /
  
-! --- Geometric namelists from Blender Collection <Master Collection>
+! --- Geometric namelists from Blender Collection <Scene Collection>
 ! MESH Cell Size: 0.100 m, 0.100 m, 0.100 m | Qty: 8000 | Aspect: 1.0 | Poisson: Yes
 &MESH ID='Domain.003' IJK=20,20,20
       XB=-1.000000,1.000000,-1.000000,1.000000,-1.000000,1.000000 /

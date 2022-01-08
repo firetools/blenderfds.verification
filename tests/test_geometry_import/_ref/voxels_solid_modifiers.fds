@@ -5,7 +5,7 @@
 &HEAD CHID='voxels_solid_modifiers' TITLE='Test voxels of solid w modifiers' /
 &TIME T_END=1.0 /
  
-! --- Geometric namelists from Blender Collection <Master Collection>
+! --- Geometric namelists from Blender Collection <Scene Collection>
 &OBST ID='Cylinder_voxels_0' SURF_ID='INERT'
       XB=0.599990,0.800010,1.099990,1.200010,-0.600010,-0.399990 /
 &OBST ID='Cylinder_voxels_1' SURF_ID='INERT'

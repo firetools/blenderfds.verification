@@ -16,7 +16,7 @@
 &SURF ID='Burner bc' RGB=255,0,0 HRRPUA=500.000 /
 &SURF ID='Material bc' RGB=204,166,111 /
  
-! --- Geometric namelists from Blender Collection <Master Collection>
+! --- Geometric namelists from Blender Collection <Scene Collection>
 
 &TAIL /
  

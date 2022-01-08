@@ -8,7 +8,7 @@
 ! --- Boundary conditions from related Blender Materials
 &SURF ID='Material_red' RGB=255,0,0 /
  
-! --- Geometric namelists from Blender Collection <Master Collection>
+! --- Geometric namelists from Blender Collection <Scene Collection>
 &OBST ID='Base' SURF_ID='INERT'
       XB=-1.000000,1.000000,-1.000000,1.000000,-1.000000,-0.500000 /
 ! XB Pixels: 3 | Resolution: 0.100 m
