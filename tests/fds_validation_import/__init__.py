@@ -2,7 +2,7 @@ import os
 from lib.import_fds import import_fds_tree
 
 FDS_CASES_PATH = "../../../firemodels/fds/Validation/"
-EXCLUDE_DIRS = None
+EXCLUDE_DIRS = ("Crown_Fires",)
 EXCLUDE_FILES = None
 
 

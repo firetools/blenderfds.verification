@@ -25,6 +25,7 @@ def run():
 
 
 # BlenderFDS imports bad geometry, but raises BFException on export
+# FIXME add expected_msg
 
 
 def import_export_bad_geom(
