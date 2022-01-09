@@ -1,3 +1,4 @@
+import datetime
 from typing import List, Tuple
 from . import import_mod
 from .bcolors import HEADER, ENDC, OKGREEN, FAIL
@@ -35,24 +36,42 @@ def run_tests(test_py_module, requested_test_names=None):
             packages[r.package][0].append(r)
         else:
             packages[r.package][1].append(r)
+
+    # Output
     # Repeat failed
+    lines = list()
     for key, value in packages.items():
-        print(f"\n{HEADER}Detailed failures of <{key}>:{ENDC}")
+        lines.append(f"\n{HEADER}Detailed failures of <{key}>:{ENDC}")
         if not value[1]:
-            print("None")
+            lines.append("None")
         else:
             for r in value[1]:
-                print(r.detail)
+                lines.append(r.detail)
     # Results
-    print(f"\n{HEADER}Overall test results:{ENDC}")
+    lines.append(f"\n{HEADER}Overall test results:{ENDC}")
     for key, value in packages.items():
         nok = len(value[0])
         nfail = len(value[1])
         ntot = nfail + nok
-        print(
+        lines.append(
             f"{ntot:>8} = {OKGREEN}{nok:>6} ok{ENDC} + {FAIL}{nfail:>6} failed{ENDC} in {key}"
         )
-    print(f"{len(results):>8} completed")
+    lines.append(f"{len(results):>8} completed")
+    # Print and save
+    print("\n".join(lines))
+    filename = (
+        "./results/"
+        + datetime.datetime.now().replace(microsecond=0).isoformat()
+        + ".txt"
+    )
+    with open(filename, "w") as f:
+        for key, value in packages.items():
+            f.write(f"\n-------- Detailed failures of <{key}> --------\n")
+            if not value[1]:
+                f.write("None\n")
+            else:
+                for r in value[1]:
+                    f.write(r.detail + "\n")
 
 
 class _TestResult:
