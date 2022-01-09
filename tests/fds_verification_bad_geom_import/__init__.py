@@ -1,5 +1,4 @@
 import os, sys, bpy
-from lib.import_fds import import_bad_fds_case
 from lib import TestFail, TestOk
 
 BlenderFDS = sys.modules["blenderfds"]
