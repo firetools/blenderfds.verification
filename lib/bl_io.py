@@ -1,5 +1,5 @@
 import os, bpy, tempfile
-from . import compare
+from . import compare, run_command
 from .testing import TestFail, TestOk, TestException
 
 # FDS to Blender
@@ -18,7 +18,7 @@ def fds_tree_to_blend(package, path, exclude_dirs=None, exclude_files=None):
                 if exclude_files and filename in exclude_files:
                     continue
                 filepath = os.path.join(p, filename)
-                results.extend(fds_to_blend(package, filepath))
+                results.extend(fds_to_blend(package=package, filepath=filepath))
     return results
 
 
@@ -36,7 +36,7 @@ def fds_to_blend(package, filepath):
     try:
         sc.from_fds(context, filepath=filepath)
     except Exception as err:
-        results.append(TestFail(package, name, str(err)))
+        results.append(TestFail(package, name, repr(err)))
     else:
         results.append(TestOk(package, name))
 
@@ -51,7 +51,7 @@ def fds_to_blend(package, filepath):
         try:
             sc.to_fds(context, full=True, filepath=fds_filepath)
         except Exception as err:
-            results.append(TestFail(package, name, str(err)))
+            results.append(TestFail(package, name, repr(err)))
         else:
             results.append(TestOk(package, name))
 
@@ -80,7 +80,7 @@ def bad_fds_to_blend(package, filepath, expected_exception, expected_msg=None):
         else:
             results.append(TestOk(package, name))
     except Exception as err:
-        results.append(TestFail(package, name, str(err)))
+        results.append(TestFail(package, name, repr(err)))
     else:
         results.append(TestFail(package, name, "Should raise a BFException"))
 
@@ -91,13 +91,13 @@ def bad_fds_to_blend(package, filepath, expected_exception, expected_msg=None):
 
 
 def blend_tree_to_fds(
-    package, path, exclude_dirs=None, exclude_files=None, ref_path=None
+    package, path, exclude_dirs=None, exclude_files=None, ref_path=None, run_fds=False
 ):
     """!
     Export to fds all blend files from tree and compare result to ref_path.
     """
     results = list()
-    for p, dirs, files in os.walk(path):  # recursive, sends filename
+    for p, dirs, files in os.walk(path):
         if exclude_dirs:
             dirs[:] = [d for d in dirs if d not in exclude_dirs]
         for filename in files:
@@ -105,11 +105,18 @@ def blend_tree_to_fds(
                 if exclude_files and filename in exclude_files:
                     continue
                 filepath = os.path.join(p, filename)
-                results.extend(blend_to_fds(package, filepath, ref_path))
+                results.extend(
+                    blend_to_fds(
+                        package=package,
+                        filepath=filepath,
+                        ref_path=ref_path,
+                        run_fds=run_fds,
+                    )
+                )
     return results
 
 
-def blend_to_fds(package, filepath, ref_path=None) -> list:
+def blend_to_fds(package, filepath, ref_path=None, run_fds=False) -> list:
     """!
     Export all scenes to fds from blend file and compare result to ref_path.
     """
@@ -124,16 +131,13 @@ def blend_to_fds(package, filepath, ref_path=None) -> list:
         with tempfile.TemporaryDirectory() as tmppath:
 
             # Export scene
-            bpy.context.window.scene = (
-                sc  # make scene visible (FIXME should not be needed, see bpy.context)
-            )
             fds_path = tmppath
             fds_filepath = os.path.join(fds_path, sc.name + ".fds")  # /tmp/scene.fds
             name = f"Export <{fds_filepath}>"
             try:
                 sc.to_fds(context, full=True, filepath=fds_filepath)
             except Exception as err:
-                results.append(TestFail(package, name, str(err)))
+                results.append(TestFail(package, name, repr(err)))
                 return results
             else:
                 results.append(TestOk(package, name))
@@ -148,6 +152,18 @@ def blend_to_fds(package, filepath, ref_path=None) -> list:
                         package=package,
                         ref_path=ref_sc_path,
                         path=fds_path,
+                    )
+                )
+
+            if run_fds:
+                # Run fds on result
+                results.extend(
+                    run_command.run_command(
+                        package=package,
+                        filepath=fds_filepath,
+                        command="fds",
+                        success="STOP: FDS completed successfully",
+                        timeout=120,
                     )
                 )
 
