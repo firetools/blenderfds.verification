@@ -1,4 +1,5 @@
-import datetime
+import datetime, os
+from pathlib import Path
 from typing import List, Tuple
 from . import import_mod
 from .bcolors import HEADER, ENDC, OKGREEN, FAIL
@@ -37,41 +38,28 @@ def run_tests(test_py_module, requested_test_names=None):
         else:
             packages[r.package][1].append(r)
 
-    # Output
-    # Repeat failed
-    lines = list()
+    # Output, on screen
+    print(f"\n{HEADER}Overall test results (see details in file):{ENDC}")
     for key, value in packages.items():
-        lines.append(f"\n{HEADER}Detailed failures of <{key}>:{ENDC}")
-        if not value[1]:
-            lines.append("None")
-        else:
-            for r in value[1]:
-                lines.append(r.detail)
-    # Results
-    lines.append(f"\n{HEADER}Overall test results:{ENDC}")
-    for key, value in packages.items():
-        nok = len(value[0])
-        nfail = len(value[1])
-        ntot = nfail + nok
-        lines.append(
-            f"{ntot:>8} = {OKGREEN}{nok:>6} ok{ENDC} + {FAIL}{nfail:>6} failed{ENDC} in {key}"
+        nk, nf = len(value[0]), len(value[1])
+        nt = nf + nk
+        print(
+            f"{nt:>7} = {OKGREEN}{nk:>5} ok{ENDC} + {FAIL}{nf:>5} failed{ENDC} in {key}"
         )
-    lines.append(f"{len(results):>8} completed")
-    # Print and save
-    print("\n".join(lines))
-    filename = (
-        "./results/"
-        + datetime.datetime.now().replace(microsecond=0).isoformat()
-        + ".txt"
-    )
-    with open(filename, "w") as f:
+    print(f"{len(results):>7} completed")
+
+    # Output, on file
+    filename = datetime.datetime.now().strftime("%Y%m%d_%H%M_test.txt")
+    filepath = os.path.join("log", filename)
+    Path("log").mkdir(parents=True, exist_ok=True)
+    with open(filepath, "w") as f:
         for key, value in packages.items():
-            f.write(f"\n-------- Detailed failures of <{key}> --------\n")
+            f.write(f"\n\n--- <{key}> ---\n")
             if not value[1]:
-                f.write("None\n")
-            else:
-                for r in value[1]:
-                    f.write(r.detail + "\n")
+                f.write("No failures\n")
+                continue
+            for r in value[1]:
+                f.write(r.detail + "\n")
 
 
 class _TestResult:
@@ -87,7 +75,7 @@ class _TestResult:
 
     @property
     def detail(self):
-        return f"\n---\n{self.log}\n{self}"
+        return f"\n---\n{self.log}\n{self.label}"
 
 
 class TestOk(_TestResult):
