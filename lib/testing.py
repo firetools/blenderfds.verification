@@ -15,11 +15,11 @@ def run_tests(test_py_module, requested_test_names=None):
     print(f"{HEADER}Requested tests:{ENDC}")
     print("  " + "\n  ".join(requested_test_names or ("all",)))
     # Run
-    print(f"{HEADER}Run tests...{ENDC}")
     results = list()
-    for key, item in tests.items():  # FIXME improve test selection (regex?)
-        if requested_test_names and key.split(".")[1] not in requested_test_names:
+    for key, item in tests.items():
+        if requested_test_names and not any(r in key for r in requested_test_names):
             continue
+        print(f"\n{HEADER}Run <{key}>...{ENDC}")
         rs = item.run()
         # Check and pile results
         if isinstance(rs, _TestResult):
@@ -67,11 +67,15 @@ class _TestResult:
         self.package = package
         self.name = name
         self.log = log
-        print(self)
+
+    def __str__(self):
+        return self.label
 
     @property
     def label(self):
-        return f"{self.package}:\n{self.name[:30]}···{self.name[len(self.name) - 76 :]}"
+        return (
+            f"{self.package}:\n  {self.name[:28]}···{self.name[len(self.name) - 76 :]}"
+        )
 
     @property
     def detail(self):
@@ -79,13 +83,15 @@ class _TestResult:
 
 
 class TestOk(_TestResult):
-    def __str__(self):
-        return f"{OKGREEN}{self.label}{ENDC}"
+    def __init__(self, package, name, log=None):
+        super().__init__(package, name, log)
+        print(end=f"{OKGREEN}Ok {ENDC}")
 
 
 class TestFail(_TestResult):
-    def __str__(self):
-        return f"{FAIL}{self.label}{ENDC}"
+    def __init__(self, package, name, log=None):
+        super().__init__(package, name, log)
+        print(end=f"{FAIL}Fail {ENDC}")
 
 
 class TestException(Exception):
