@@ -40,7 +40,7 @@ def import_export_bad_geom(
     try:
         sc.from_fds(context, filepath=filepath)
     except Exception as err:
-        results.append(TestFail(package, name, str(err)))
+        results.append(TestFail(package, name, repr(err)))
         return results
     else:
         results.append(TestOk(package, name))
@@ -58,7 +58,7 @@ def import_export_bad_geom(
         else:
             results.append(TestOk(package, name))
     except Exception as err:
-        results.append(TestFail(package, name, str(err)))
+        results.append(TestFail(package, name, repr(err)))
     else:
         results.append(TestFail(package, name, "Should raise BFException"))
 
