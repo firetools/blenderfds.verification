@@ -1,0 +1,34 @@
+&HEAD CHID='geom_xb' TITLE='This is an example case' /
+&TIME T_END=1.0 /
+
+! --- Boundary conditions from related Blender Materials
+&SURF ID='Red bc' RGB=255,0,0 /
+&SURF ID='Green bc' RGB=0,255,0 /
+&SURF ID='Blue bc' RGB=0,0,255 /
+&SURF ID='Dark red bc' RGB=100,0,0 /
+&SURF ID='Dark green bc' RGB=0,100,0 /
+&SURF ID='Dark blue bc' RGB=0,0,100 /
+
+! --- Geometric namelists from Blender Collection <Collection>
+&MOVE ID='Cube_move0' DX=1 /
+&MOVE ID='Cube_move1' DX=4 /
+&MOVE ID='Cube_move2' DX=7 /
+&GEOM ID='Cube_ID'
+      SURF_ID='Green bc'
+      MOVE_ID='Cube_move0'
+      XB=-1.000000,1.000000,-1.000000,1.000000,0.000000,2.000000 /
+&GEOM ID='Cube_IDS'
+      SURF_IDS='Red bc','Green bc','Blue bc'
+      MOVE_ID='Cube_move1'
+      XB=-1.000000,1.000000,-1.000000,1.000000,0.000000,2.000000 /
+&GEOM ID='Cube_ID6'
+      SURF_ID6='Red bc','Dark red bc','Green bc','Dark green bc','Blue bc','Dark blue bc'
+      MOVE_ID='Cube_move2'
+      XB=-1.000000,1.000000,-1.000000,1.000000,0.000000,2.000000 /
+
+! MESH Cell Size: 0.400 m, 0.400 m, 0.400 m | Qty: 1000 | Aspect: 1.0 | Poisson: Yes
+&MESH ID='Domain' IJK=10,10,10
+      XB=-2.000000,2.000000,-2.000000,2.000000,0.000000,4.000000 /
+
+&TAIL /
+ 

@@ -1,0 +1,54 @@
+&HEAD CHID='geom_xb_move' TITLE='This is an example case' /
+&TIME T_END=1.0 /
+
+! --- Boundary conditions from related Blender Materials
+&SURF ID='Red bc' RGB=255,0,0 /
+&SURF ID='Green bc' RGB=0,255,0 /
+&SURF ID='Blue bc' RGB=0,0,255 /
+&SURF ID='Dark red bc' RGB=100,0,0 /
+&SURF ID='Dark green bc' RGB=0,100,0 /
+&SURF ID='Dark blue bc' RGB=0,0,100 /
+
+! --- Geometric namelists from Blender Collection <Collection>
+&MOVE ID='Cube_move0' DX=3 DY=2 DZ=1 /
+&MOVE ID='Cube_move1' SCALEX=2 SCALEY=3 SCALEZ=4 DX=4 /
+&MOVE ID='Cube_move2' SCALE=2 /
+&MOVE ID='Cube_move3' X0=5 Y0=5 Z0=5 AXIS=1,1,1 ROTATION_ANGLE=30 DX=-4 /
+&MOVE ID='Cube_move4' DX=1 DY=2 DZ=3
+      SCALEX=2 SCALEY=3 SCALEZ=4 X0=5 Y0=5 Z0=5 AXIS=1,0,0 ROTATION_ANGLE=30 /
+&MOVE ID='Cube_move5'
+      T34=2.000000,0.000000,0.000000,0.000000,2.598076,1.500000,0.000000,
+        -2.000000,3.464101,-3.000000,1.205773,-6.428205 /
+
+&GEOM ID='Cube DX=1 DY=2 DZ=3'
+      SURF_ID6='Red bc','Dark red bc','Green bc','Dark green bc','Blue bc','Dark blue bc'
+      MOVE_ID='Cube_move0'
+      XB=-1.000000,1.000000,-1.000000,1.000000,0.000000,2.000000 /
+&GEOM ID='Cube SCALEX=2 SCALEY=3 SCALEZ=4'
+      SURF_ID6='Red bc','Dark red bc','Green bc','Dark green bc','Blue bc','Dark blue bc'
+      MOVE_ID='Cube_move1'
+      XB=-1.000000,1.000000,-1.000000,1.000000,0.000000,2.000000 /
+&GEOM ID='Cube SCALE=2'
+      SURF_ID6='Red bc','Dark red bc','Green bc','Dark green bc','Blue bc','Dark blue bc'
+      MOVE_ID='Cube_move2'
+      XB=-1.000000,1.000000,-1.000000,1.000000,0.000000,2.000000 /
+&GEOM ID='Cube X0=5 Y0=5 Z0=5 AXIS=1,0,0 ROTATION_ANGLE=30'
+      SURF_ID6='Red bc','Dark red bc','Green bc','Dark green bc','Blue bc','Dark blue bc'
+      MOVE_ID='Cube_move3'
+      XB=-1.000000,1.000000,-1.000000,1.000000,0.000000,2.000000 /
+&GEOM ID='Cube all'
+      SURF_ID6='Red bc','Dark red bc','Green bc','Dark green bc','Blue bc','Dark blue bc'
+      MOVE_ID='Cube_move4'
+      XB=-1.000000,1.000000,-1.000000,1.000000,0.000000,2.000000 /
+&GEOM ID='Cube T34'
+      SURF_ID6='Red bc','Dark red bc','Green bc','Dark green bc','Blue bc','Dark blue bc'
+      MOVE_ID='Cube_move5'
+      XB=-1.000000,1.000000,-1.000000,1.000000,0.000000,2.000000 /
+
+
+! MESH Cell Size: 0.400 m, 0.400 m, 0.400 m | Qty: 1000 | Aspect: 1.0 | Poisson: Yes
+&MESH ID='Domain' IJK=10,10,10
+      XB=-2.000000,2.000000,-2.000000,2.000000,0.000000,4.000000 /
+
+&TAIL /
+ 
