@@ -2,12 +2,28 @@ import os, bpy, tempfile
 from . import compare, run_command
 from .testing import TestFail, TestOk, TestException
 
+# Common
+
+
+def open_blend_file(filepath=None):
+    if filepath:
+        bpy.ops.wm.open_mainfile(filepath=filepath)
+    else:
+        bpy.ops.wm.read_homefile()
+
+
+class FakeException(Exception):
+    pass
+
+
 # FDS to Blender
 
 
-def fds_tree_to_blend(package, path, exclude_dirs=None, exclude_files=None):
+def fds_tree_to_blend(
+    package, path, exclude_dirs=None, exclude_files=None, ref_path=None, run_fds=False
+):
     """!
-    Import to blender all fds files from tree.
+    Import all fds files from dir tree to Blender.
     """
     results = list()
     for p, dirs, files in os.walk(path):
@@ -18,71 +34,71 @@ def fds_tree_to_blend(package, path, exclude_dirs=None, exclude_files=None):
                 if exclude_files and filename in exclude_files:
                     continue
                 filepath = os.path.join(p, filename)
-                results.extend(fds_to_blend(package=package, filepath=filepath))
+                results.extend(
+                    fds_case_to_blend(
+                        package=package,
+                        filepath=filepath,
+                        ref_path=ref_path,
+                        run_fds=run_fds,
+                    )
+                )
     return results
 
 
-def fds_to_blend(package, filepath):
-    """!
-    Import fds case from filepath.
-    """
+def fds_case_to_blend(
+    package,
+    filepath,
+    expected_msg=None,
+    to_fds_expected_msg=None,
+    ref_path=None,
+    run_fds=False,
+):
     results = list()
 
-    # Import fds case
-    name = f"import <{filepath}>"
-    bpy.ops.wm.read_homefile()  # load default
-    sc = bpy.data.scenes.new("tmp")  # new scene
+    # New blend file with one new scene only
+    open_blend_file(filepath=None)  # new file
+    old_scs = bpy.data.scenes[:]  # get existing scenes
+    sc = bpy.data.scenes.new("scene_tmp")  # get new scene
+    for old_sc in old_scs:  # rm existing scenes
+        bpy.data.scenes.remove(old_sc, do_unlink=True)
+
     context = bpy.context
+
+    # fds case to Scene
+    name = f"fds case to scene: <{filepath}> to <{sc.name}>"
     try:
         sc.from_fds(context, filepath=filepath)
     except Exception as err:
-        results.append(TestFail(package, name, repr(err)))
-    else:
-        results.append(TestOk(package, name))
-
-    # Export imported case
-    name = f"export imported <{filepath}>"
-    with tempfile.TemporaryDirectory() as tmppath:
-        # Save tmp blend file to set bpy.data.filepath
-        bl_filepath = os.path.join(tmppath, sc.name + "_tmp.blend")
-        bpy.ops.wm.save_as_mainfile(filepath=bl_filepath)
-        # Export fds file
-        fds_filepath = os.path.join(tmppath, sc.name + "_tmp.fds")
-        try:
-            sc.to_fds(context, full=True, filepath=fds_filepath)
-        except Exception as err:
-            results.append(TestFail(package, name, repr(err)))
-        else:
-            results.append(TestOk(package, name))
-
-    return results
-
-
-def bad_fds_to_blend(package, filepath, expected_exception, expected_msg=None):
-    """!
-    Import bad fds case from filepath.
-    """
-    results = list()
-
-    # Import fds case
-    name = f"import bad <{filepath}>"
-    bpy.ops.wm.read_homefile()  # load default
-    sc = bpy.data.scenes.new("tmp")  # new scene
-    context = bpy.context
-    try:
-        sc.from_fds(context, filepath=filepath)
-    except expected_exception as err:
         if expected_msg:
-            if str(err) == expected_msg:
-                results.append(TestOk(package, name))
+            if expected_msg == str(err):
+                results.append(TestOk(package, name, f"Ok err: <{str(err)}>"))
             else:
-                results.append(TestFail(package, name, f"Unexpected error msg <{err}>"))
+                results.append(TestFail(package, name, f"Unexpected msg: <{str(err)}>"))
         else:
-            results.append(TestOk(package, name))
-    except Exception as err:
-        results.append(TestFail(package, name, repr(err)))
+            results.append(TestFail(package, name, f"Unexpected err: <{str(err)}>"))
+        return results
     else:
-        results.append(TestFail(package, name, "Should raise a BFException"))
+        if expected_msg:
+            results.append(TestFail(package, name, f"Missed error: <{expected_msg}>"))
+            return results
+    results.append(TestOk(package, name))
+
+    # New tmp blend to fds
+    with tempfile.TemporaryDirectory() as tmppath:
+
+        # Save tmp blend file to set bpy.data.filepath
+        bl_filepath = os.path.join(tmppath, sc.name + ".blend")  # /tmp/scene.blend
+        bpy.ops.wm.save_as_mainfile(filepath=bl_filepath)
+
+        results.extend(
+            blend_to_fds(
+                package=package,
+                filepath=bl_filepath,
+                expected_msg=to_fds_expected_msg,
+                ref_path=ref_path,
+                run_fds=run_fds,
+            )
+        )
 
     return results
 
@@ -94,7 +110,7 @@ def blend_tree_to_fds(
     package, path, exclude_dirs=None, exclude_files=None, ref_path=None, run_fds=False
 ):
     """!
-    Export to fds all blend files from tree and compare result to ref_path.
+    Export all blend files from dir tree to fds.
     """
     results = list()
     for p, dirs, files in os.walk(path):
@@ -116,34 +132,51 @@ def blend_tree_to_fds(
     return results
 
 
-def blend_to_fds(package, filepath, ref_path=None, run_fds=False) -> list:
-    """!
-    Export all scenes to fds from blend file and compare result to ref_path.
-    """
+def blend_to_fds(
+    package,
+    filepath,
+    expected_msg=None,
+    ref_path=None,
+    run_fds=False,
+):
     results = list()
 
     # Open blend file
+    open_blend_file(filepath=filepath)
     context = bpy.context
-    bpy.ops.wm.open_mainfile(filepath=filepath)
 
-    # Export each scene to its fds_case and compare it with ref
     for sc in bpy.data.scenes:
         with tempfile.TemporaryDirectory() as tmppath:
 
-            # Export scene
+            # Scene to fds case
             fds_path = tmppath
             fds_filepath = os.path.join(fds_path, sc.name + ".fds")  # /tmp/scene.fds
-            name = f"Export <{fds_filepath}>"
+            name = f"scene to fds: <{sc.name}> to <{fds_filepath}>"
             try:
-                sc.to_fds(context, full=True, filepath=fds_filepath)
+                sc.to_fds(context=context, full=True, save=True, filepath=fds_filepath)
             except Exception as err:
-                results.append(TestFail(package, name, repr(err)))
+                if expected_msg:
+                    if expected_msg == str(err):
+                        results.append(TestOk(package, name, f"Ok err: <{str(err)}>"))
+                    else:
+                        results.append(
+                            TestFail(package, name, f"Unexpected msg: <{str(err)}>")
+                        )
+                else:
+                    results.append(
+                        TestFail(package, name, f"Unexpected err: <{str(err)}>")
+                    )
                 return results
             else:
-                results.append(TestOk(package, name))
+                if expected_msg:
+                    results.append(
+                        TestFail(package, name, f"Missed error: <{expected_msg}>")
+                    )
+                    return results
+            results.append(TestOk(package, name))
 
+            # Compare with /ref/filename.blend/scene/
             if ref_path:
-                # Compare with /ref/filename.blend/scene/
                 ref_sc_path = os.path.join(
                     ref_path, os.path.basename(filepath), sc.name
                 )
@@ -155,8 +188,8 @@ def blend_to_fds(package, filepath, ref_path=None, run_fds=False) -> list:
                     )
                 )
 
+            # Run fds on result
             if run_fds:
-                # Run fds on result
                 results.extend(
                     run_command.run_command(
                         package=package,
