@@ -49,7 +49,7 @@ def run_tests(test_py_module, requested_test_names=None):
     print(f"{len(results):>7} completed")
 
     # Output, on file
-    filename = datetime.datetime.now().strftime("%Y%m%d_%H%M_test.txt")
+    filename = f"{datetime.datetime.now().strftime('%Y%m%d_%H%M')}_{'_'.join(requested_test_names) or 'all'}.txt"
     filepath = os.path.join("log", filename)
     Path("log").mkdir(parents=True, exist_ok=True)
     with open(filepath, "w") as f:

@@ -59,3 +59,41 @@ def run_command(
     if log.find(success) > 0:
         return (TestOk(package, name),)
     return (TestFail(package, name, log),)
+
+
+# FIXME not used
+
+
+def rm_clean_fds(path, full=False):
+    """!
+    Clean all FDS runtime files from path.
+    @param path: path to be cleaned.
+    """
+    extensions = [
+        ".binfo",
+        ".sinfo",
+        ".end",
+        ".out",
+        ".s3d",
+        ".s3d.sz",
+        ".csv",
+        "_git.txt",
+        ".smv",
+        ".ge",
+        ".ge2",
+        ".bf",
+        ".bf.bnd",
+        ".sf",
+        ".sf.bnd",
+        ".prt5",
+        ".prt5.bnd",
+    ]
+    if full:
+        extensions.extend((".fds", ".bingeom"))
+    print(f"Cleaning <{path}> from FDS runtime files.")
+    for file in os.scandir(path):
+        n = file.name
+        for e in extensions:
+            if n.endswith(e):
+                os.unlink(file.path)
+                break
