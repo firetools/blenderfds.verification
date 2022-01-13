@@ -1,0 +1,49 @@
+&HEAD CHID='geom_xb_move_scale' /
+&TIME T_END=1.0 /
+
+&SURF ID='Red bc' RGB=255,0,0 /
+&SURF ID='Green bc' RGB=0,255,0 /
+&SURF ID='Blue bc' RGB=0,0,255 /
+&SURF ID='Dark red bc' RGB=50,0,0 /
+&SURF ID='Dark green bc' RGB=0,50,0 /
+&SURF ID='Dark blue bc' RGB=0,0,50 /
+
+&MESH ID='Domain' IJK=10,10,10
+      XB=-2.000000,2.000000,-2.000000,2.000000,-2.000000,2.000000 /
+
+&MOVE ID='Cube001' /
+&GEOM ID='Cube001'
+      SURF_ID6='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc','Blue bc'
+      MOVE_ID='Cube001'
+      XB=-1.000000,1.000000,-1.000000,1.000000,-1.000000,1.000000 /
+
+&MOVE ID='Cube002' DX=5. SCALE=.5 /
+&GEOM ID='Cube002'
+      SURF_ID6='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc','Blue bc'
+      MOVE_ID='Cube002'
+      XB=-1.000000,1.000000,-1.000000,1.000000,-1.000000,1.000000 /
+
+&MOVE ID='Cube003' DX=10. SCALEX=.5 /
+&GEOM ID='Cube003'
+      SURF_ID6='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc','Blue bc'
+      MOVE_ID='Cube003'
+      XB=-1.000000,1.000000,-1.000000,1.000000,-1.000000,1.000000 /
+
+&MOVE ID='Cube004' DX=15. SCALEY=.5 /
+&GEOM ID='Cube004'
+      SURF_ID6='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc','Blue bc'
+      MOVE_ID='Cube004'
+      XB=-1.000000,1.000000,-1.000000,1.000000,-1.000000,1.000000 /
+
+&MOVE ID='Cube005' DX=20. SCALEZ=.5 /
+&GEOM ID='Cube005'
+      SURF_ID6='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc','Blue bc'
+      MOVE_ID='Cube005'
+      XB=-1.000000,1.000000,-1.000000,1.000000,-1.000000,1.000000 /
+
+&MOVE ID='Cube006' DX=25. SCALEX=2. SCALEY=1. SCALEZ=.5 /
+&GEOM ID='Cube006'
+      SURF_ID6='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc','Blue bc'
+      MOVE_ID='Cube006'
+      XB=-1.000000,1.000000,-1.000000,1.000000,-1.000000,1.000000 /
+
