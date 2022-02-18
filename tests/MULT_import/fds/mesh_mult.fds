@@ -1,0 +1,77 @@
+&HEAD CHID='mesh_mult' /
+&TIME T_END=1.0 /
+
+&MULT ID='mesh_00_mult' /
+&MESH ID='mesh_00' IJK=4,5,6, XB=0.0,1.0,0.0,1.0,0.0,1.0, MULT_ID='mesh_00_mult' /
+
+
+&MULT ID='mesh_01_mult' 
+      DX0=5. DX=1. I_LOWER=0 I_UPPER=3 /
+&MESH ID='mesh_01' IJK=4,5,6, XB=0.0,1.0,0.0,1.0,0.0,1.0, MULT_ID='mesh_01_mult' /
+
+&MULT ID='mesh_02_mult' 
+      DX0=10. DX=1. I_LOWER=0 I_UPPER=3
+      DY=1. J_LOWER=0 J_UPPER=3 /
+&MESH ID='mesh_02' IJK=4,5,6, XB=0.0,1.0,0.0,1.0,0.0,1.0, MULT_ID='mesh_02_mult' /
+
+&MULT ID='mesh_03_mult' 
+      DX0=15. DX=1. I_LOWER=0 I_UPPER=3
+      DY=1. J_LOWER=0 J_UPPER=3
+      DZ=1. K_LOWER=0 K_UPPER=3 /
+&MESH ID='mesh_03' IJK=4,5,6, XB=0.0,1.0,0.0,1.0,0.0,1.0, MULT_ID='mesh_03_mult' /
+
+
+&MULT ID='mesh_11_mult' 
+      DX0=5. DY0=5. DX=1. I_LOWER=0 I_LOWER_SKIP=2 I_UPPER=3 /
+&MESH ID='mesh_11' IJK=4,5,6, XB=0.0,1.0,0.0,1.0,0.0,1.0, MULT_ID='mesh_11_mult' /
+
+&MULT ID='mesh_12_mult' 
+      DX0=10. DX=1. I_LOWER=0 I_UPPER=3
+      DY=1. J_LOWER=0 J_LOWER_SKIP=2 J_UPPER=3 /
+&MESH ID='mesh_12' IJK=4,5,6, XB=0.0,1.0,0.0,1.0,0.0,1.0, MULT_ID='mesh_12_mult' /
+
+&MULT ID='mesh_13_mult' 
+      DX0=15. DY0=5. DX=1. I_LOWER=0 I_UPPER=3
+      DY=1. J_LOWER=0 J_UPPER=3
+      DZ=1. K_LOWER=0 K_LOWER_SKIP=2 K_UPPER=3 /
+&MESH ID='mesh_13' IJK=4,5,6, XB=0.0,1.0,0.0,1.0,0.0,1.0, MULT_ID='mesh_13_mult' /
+
+
+&MULT ID='mesh_21_mult' 
+      DX0=5. DY0=10. DX=1. I_LOWER=0 I_LOWER_SKIP=1 I_UPPER_SKIP=2 I_UPPER=3 /
+&MESH ID='mesh_21' IJK=4,5,6, XB=0.0,1.0,0.0,1.0,0.0,1.0, MULT_ID='mesh_21_mult' /
+
+&MULT ID='mesh_22_mult' 
+      DX0=10. DY0=10. DX=1. I_LOWER=0 I_UPPER=3
+      DY=1. J_LOWER=0 J_LOWER_SKIP=1 J_UPPER_SKIP=2 J_UPPER=3 /
+&MESH ID='mesh_22' IJK=4,5,6, XB=0.0,1.0,0.0,1.0,0.0,1.0, MULT_ID='mesh_22_mult' /
+
+&MULT ID='mesh_23_mult' 
+      DX0=15. DY0=10. DX=1. I_LOWER=0 I_UPPER=3
+      DY=1. J_LOWER=0 J_UPPER=3
+      DZ=1. K_LOWER=0 K_LOWER_SKIP=1 K_UPPER_SKIP=2 K_UPPER=3 /
+&MESH ID='mesh_23' IJK=4,5,6, XB=0.0,1.0,0.0,1.0,0.0,1.0, MULT_ID='mesh_23_mult' /
+
+
+&MULT ID='mesh_31_mult' 
+      DX0=5. DY0=15.
+      DX=1. I_LOWER=0 I_LOWER_SKIP=1 I_UPPER_SKIP=2 I_UPPER=3
+      DY=1. J_LOWER=0 J_LOWER_SKIP=1 J_UPPER_SKIP=2 J_UPPER=3
+      DZ=1. K_LOWER=0 K_LOWER_SKIP=1 K_UPPER_SKIP=2 K_UPPER=3 /
+&MESH ID='mesh_31' IJK=4,5,6, XB=0.0,1.0,0.0,1.0,0.0,1.0, MULT_ID='mesh_31_mult' /
+
+&MULT ID='mesh_32_mult' 
+      DX0=10. DY0=15.
+      DX=1. I_LOWER=0 I_LOWER_SKIP=1 I_UPPER_SKIP=2 I_UPPER=3
+      DY=1. J_LOWER=0 J_LOWER_SKIP=1 J_UPPER=3
+      DZ=1. K_LOWER=0 K_LOWER_SKIP=1 K_UPPER_SKIP=2 K_UPPER=3 /
+&MESH ID='mesh_32' IJK=4,5,6, XB=0.0,1.0,0.0,1.0,0.0,1.0, MULT_ID='mesh_32_mult' /
+
+&MULT ID='mesh_33_mult' 
+      DX0=15. DY0=15.
+      DX=1. I_LOWER=0 I_LOWER_SKIP=1 I_UPPER_SKIP=2 I_UPPER=3
+      DY=1. J_LOWER=0 J_LOWER_SKIP=1 J_UPPER_SKIP=2 J_UPPER=3
+      DZ=1. K_LOWER=0 K_UPPER_SKIP=2 K_UPPER=3 /
+&MESH ID='mesh_33' IJK=4,5,6, XB=0.0,1.0,0.0,1.0,0.0,1.0, MULT_ID='mesh_33_mult' /
+
+&TAIL /

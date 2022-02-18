@@ -73,25 +73,26 @@ class _TestResult:
 
     @property
     def label(self):
-        return (
-            f"{self.package}:\n  {self.name[:28]}···{self.name[len(self.name) - 76 :]}"
-        )
+        # return f"{self.package}:\n{self.name[:28]}···{self.name[len(self.name) - 76 :]}"
+        return f"{self.package}:\n{self.name}"
 
     @property
     def detail(self):
-        return f"\n---\n{self.log}\n{self.label}"
+        return f"\n---\n{self.log}\n{self.label}\n---\n"
 
 
 class TestOk(_TestResult):
     def __init__(self, package, name, log=None):
         super().__init__(package, name, log)
-        print(end=f"{OKGREEN}Ok {ENDC}")
+        # print(end=f"{OKGREEN}Ok {ENDC}")
+        print(f"{OKGREEN}{self.detail}{ENDC}")
 
 
 class TestFail(_TestResult):
     def __init__(self, package, name, log=None):
         super().__init__(package, name, log)
-        print(end=f"{FAIL}Fail {ENDC}")
+        # print(end=f"{FAIL}Fail {ENDC}")
+        print(f"{FAIL}{self.detail}{ENDC}")
 
 
 class TestException(Exception):

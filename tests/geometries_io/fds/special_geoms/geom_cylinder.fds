@@ -1,0 +1,35 @@
+&HEAD CHID='geom_cylinder' /
+&TIME T_END=1.0 /
+
+&SURF ID='Red bc' RGB=255,0,0 /
+&SURF ID='Green bc' RGB=0,255,0 /
+&SURF ID='Blue bc' RGB=0,0,255 /
+&SURF ID='Dark red bc' RGB=50,0,0 /
+&SURF ID='Dark green bc' RGB=0,50,0 /
+&SURF ID='Dark blue bc' RGB=0,0,50 /
+
+&MESH ID='Domain' IJK=10,10,10
+      XB=-2.000000,2.000000,-2.000000,2.000000,-2.000000,2.000000 /
+
+&GEOM ID='Cyl002' CYLINDER_ORIGIN=5.,0.,0. CYLINDER_LENGTH=1. CYLINDER_RADIUS=.5 CYLINDER_AXIS=1.,0.,0.
+      SURF_IDS='Red bc','Green bc','Dark red bc' /
+
+&GEOM ID='Cyl003' CYLINDER_ORIGIN=10.,0.,0. CYLINDER_LENGTH=1. CYLINDER_RADIUS=.5 CYLINDER_AXIS=0.,1.,0.
+      SURF_IDS='Green bc','Blue bc','Dark green bc' /
+
+&GEOM ID='Cyl004' CYLINDER_ORIGIN=15.,0.,0. CYLINDER_LENGTH=1. CYLINDER_RADIUS=.5 CYLINDER_AXIS=0.,0.,1.
+      SURF_IDS='Blue bc','Green bc','Dark blue bc' /
+
+&MOVE ID='Cyl012' DY=5. /
+&GEOM ID='Cyl012' CYLINDER_ORIGIN=5.,0.,0. CYLINDER_LENGTH=1. CYLINDER_RADIUS=.5 CYLINDER_AXIS=1.,0.,0.
+      SURF_IDS='Red bc','Green bc','Dark red bc' MOVE_ID='Cyl012' /
+
+&GEOM ID='Cyl013' CYLINDER_ORIGIN=10.,0.,0. CYLINDER_LENGTH=1. CYLINDER_RADIUS=.5 CYLINDER_AXIS=0.,1.,0.
+      SURF_IDS='Green bc','Blue bc','Dark green bc' MOVE_ID='Cyl012' /
+
+&GEOM ID='Cyl014' CYLINDER_ORIGIN=15.,0.,0. CYLINDER_LENGTH=1. CYLINDER_RADIUS=.5 CYLINDER_AXIS=0.,0.,1.
+      SURF_IDS='Blue bc','Green bc','Dark blue bc' MOVE_ID='Cyl012' /
+
+&GEOM ID='Cyl022' CYLINDER_ORIGIN=20.,0.,0. CYLINDER_LENGTH=2. CYLINDER_RADIUS=1.5 CYLINDER_AXIS=1.,1.,1.
+      SURF_IDS='Blue bc','Green bc','Dark blue bc' MOVE_ID='Cyl012' /
+

@@ -1,0 +1,10 @@
+&HEAD CHID='bingeom_no_path' /
+&TIME T_END=1.0 /
+&MESH ID='Domain' IJK=10,10,10
+      XB=-2.000000,2.000000,-2.000000,2.000000,-2.000000,2.000000, /
+
+&SURF ID='Green bc' RGB=0,255,0 /
+&SURF ID='Blue bc' RGB=0,0,255 /
+
+&GEOM ID='Cube' SURF_ID='Green bc','Blue bc' BINARY_FILE='Cube.bingeom' /
+

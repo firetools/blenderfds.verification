@@ -1,0 +1,32 @@
+&HEAD CHID='geom_sphere' /
+&TIME T_END=1.0 /
+
+&SURF ID='Red bc' RGB=255,0,0 /
+&SURF ID='Green bc' RGB=0,255,0 /
+&SURF ID='Blue bc' RGB=0,0,255 /
+&SURF ID='Dark red bc' RGB=50,0,0 /
+&SURF ID='Dark green bc' RGB=0,50,0 /
+&SURF ID='Dark blue bc' RGB=0,0,50 /
+
+&MESH ID='Domain' IJK=10,10,10
+      XB=-2.000000,2.000000,-2.000000,2.000000,-2.000000,2.000000 /
+
+&GEOM ID='Sphere002' SPHERE_ORIGIN=5.,0.,0. SPHERE_RADIUS=.5
+      SURF_ID='Red bc' /
+
+&GEOM ID='Sphere003' SPHERE_ORIGIN=10.,0.,0. SPHERE_RADIUS=1.5
+      SURF_ID='Red bc' /
+
+&GEOM ID='Sphere004' SPHERE_ORIGIN=15.,0.,0. SPHERE_RADIUS=2.5
+      SURF_ID='Red bc' /
+
+&MOVE ID='Sphere012' DY=5. /
+&GEOM ID='Sphere012' SPHERE_ORIGIN=5.,0.,0. SPHERE_RADIUS=.5
+      SURF_ID='Red bc' MOVE_ID='Sphere012' /
+
+&GEOM ID='Sphere013' SPHERE_ORIGIN=10.,0.,0. SPHERE_RADIUS=1.5
+      SURF_ID='Red bc' MOVE_ID='Sphere012' /
+
+&GEOM ID='Sphere014' SPHERE_ORIGIN=15.,0.,0. SPHERE_RADIUS=2.5
+      SURF_ID='Red bc' MOVE_ID='Sphere012' /
+

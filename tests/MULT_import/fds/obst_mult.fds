@@ -1,0 +1,26 @@
+&HEAD CHID='obst_mult' /
+&TIME T_END=0. /
+
+&MESH ID='Domain' IJK=100,100,100, XB=0.0,1.0,0.0,1.0,0.0,1.0 /
+
+&SURF ID='Red bc' RGB=255,0,0 /
+&SURF ID='Green bc' RGB=0,255,0 /
+&SURF ID='Blue bc' RGB=0,0,255 /
+&SURF ID='Dark red bc' RGB=50,0,0 /
+&SURF ID='Dark green bc' RGB=0,50,0 /
+&SURF ID='Dark blue bc' RGB=0,0,50 /
+
+&MULT ID='south' DXB=0.01,-.01,0.01,0.01,0.01,0.01 N_LOWER=0 N_UPPER=39 /
+&MULT ID='north' DXB=0.01,-.01,-.01,-.01,0.01,0.01 N_LOWER=0 N_UPPER=39 /
+&MULT ID='east'  DXB=-.01,-.01,0.01,-.01,0.01,0.01 N_LOWER=0 N_UPPER=39 /
+&MULT ID='west'  DXB=0.01,0.01,0.01,-.01,0.01,0.01 N_LOWER=0 N_UPPER=39 /
+
+&OBST ID='south' XB=0.10,0.90,0.10,0.11,0.10,0.11 SURF_ID='Dark red bc' MULT_ID='south' / -y
+&OBST ID='north' XB=0.10,0.90,0.89,0.90,0.10,0.11 SURF_ID='Red bc' MULT_ID='north' / +y
+&OBST ID='west' XB=0.10,0.11,0.11,0.89,0.10,0.11 SURF_ID='Dark green bc' MULT_ID='west' / -x
+&OBST ID='east' XB=0.89,0.90,0.11,0.89,0.10,0.11 SURF_ID='Green bc' MULT_ID='east' / +x
+
+&MULT ID='holes', DX=0.15, DZ=0.1, I_UPPER=1, K_UPPER=1 /
+&HOLE ID='hole' XB=0.40,0.45,0.00,1.00,0.15,0.20 MULT_ID='holes' /
+
+&TAIL /

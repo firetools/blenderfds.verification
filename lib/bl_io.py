@@ -65,7 +65,7 @@ def fds_case_to_blend(
     context = bpy.context
 
     # fds case to Scene
-    name = f"fds case to scene: <{filepath}> to <{sc.name}>"
+    name = f"Scene from_fds: <{sc.name}> <{filepath}>"
     try:
         sc.from_fds(context, filepath=filepath)
     except Exception as err:
@@ -79,7 +79,7 @@ def fds_case_to_blend(
         return results
     else:
         if expected_msg:
-            results.append(TestFail(package, name, f"Missed error: <{expected_msg}>"))
+            results.append(TestFail(package, name, f"Missed err: <{expected_msg}>"))
             return results
     results.append(TestOk(package, name))
 
@@ -132,9 +132,33 @@ def blend_tree_to_fds(
     return results
 
 
+def _exec_script(package, sc, script, expected_msg):
+    results = list()
+    name = f"Script on Scene: <{sc.name}>"
+    try:
+        exec(script)
+    except Exception as err:
+        if expected_msg:
+            if expected_msg == str(err):
+                results.append(TestOk(package, name, f"Ok err: <{str(err)}>"))
+            else:
+                results.append(TestFail(package, name, f"Unexpected msg: <{str(err)}>"))
+        else:
+            results.append(TestFail(package, name, f"Unexpected err: <{str(err)}>"))
+        return results
+    else:
+        if expected_msg:
+            results.append(TestFail(package, name, f"Missed err: <{expected_msg}>"))
+            return results
+    results.append(TestOk(package, name))
+    return results
+
+
 def blend_to_fds(
     package,
     filepath,
+    script=None,
+    script_expected_msg=None,
     expected_msg=None,
     ref_path=None,
     run_fds=False,
@@ -148,12 +172,24 @@ def blend_to_fds(
     for sc in bpy.data.scenes:
         with tempfile.TemporaryDirectory() as tmppath:
 
+            # Execute script
+            if script:
+                results.extend(
+                    _exec_script(
+                        package=package,
+                        sc=sc,
+                        script=script,
+                        expected_msg=script_expected_msg,
+                    )
+                )
+
             # Scene to fds case
             fds_path = tmppath
             fds_filepath = os.path.join(fds_path, sc.name + ".fds")  # /tmp/scene.fds
-            name = f"scene to fds: <{sc.name}> to <{fds_filepath}>"
+            name = f"Scene to_fds: <{sc.name}> <{fds_filepath}>"
             try:
-                sc.to_fds(context=context, full=True, save=True, filepath=fds_filepath)
+                sc.bf_config_directory = fds_path
+                sc.to_fds(context=context, full=True, save=True)
             except Exception as err:
                 if expected_msg:
                     if expected_msg == str(err):
@@ -195,7 +231,7 @@ def blend_to_fds(
                         package=package,
                         filepath=fds_filepath,
                         command="fds",
-                        success="STOP: FDS completed successfully",
+                        success="STOP:",
                         timeout=120,
                     )
                 )
