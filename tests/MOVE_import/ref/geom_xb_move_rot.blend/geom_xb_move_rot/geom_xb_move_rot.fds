@@ -15,65 +15,41 @@
 
 ! --- Geometric namelists from Blender Collections
 ! GEOM Vertices: 24 | Faces: 36
-&GEOM ID='Cube001'
-      SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc',
-        'Blue bc'
-      BINARY_FILE='New GEOM.bingeom' /
+&GEOM ID='Cube001' SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc',
+      'Dark blue bc','Blue bc' BINARY_FILE='New GEOM.bingeom' /
 ! GEOM Vertices: 24 | Faces: 36
-&GEOM ID='Cube002'
-      SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc',
-        'Blue bc'
-      BINARY_FILE='New GEOM.001.bingeom' /
+&GEOM ID='Cube002' SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc',
+      'Dark blue bc','Blue bc' BINARY_FILE='New GEOM.001.bingeom' /
 ! GEOM Vertices: 24 | Faces: 36
-&GEOM ID='Cube003'
-      SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc',
-        'Blue bc'
-      BINARY_FILE='New GEOM.002.bingeom' /
+&GEOM ID='Cube003' SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc',
+      'Dark blue bc','Blue bc' BINARY_FILE='New GEOM.002.bingeom' /
 ! GEOM Vertices: 24 | Faces: 36
-&GEOM ID='Cube011'
-      SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc',
-        'Blue bc'
-      BINARY_FILE='New GEOM.003.bingeom' /
+&GEOM ID='Cube011' SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc',
+      'Dark blue bc','Blue bc' BINARY_FILE='New GEOM.003.bingeom' /
 ! GEOM Vertices: 24 | Faces: 36
-&GEOM ID='Cube012'
-      SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc',
-        'Blue bc'
-      BINARY_FILE='New GEOM.004.bingeom' /
+&GEOM ID='Cube012' SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc',
+      'Dark blue bc','Blue bc' BINARY_FILE='New GEOM.004.bingeom' /
 ! GEOM Vertices: 24 | Faces: 36
-&GEOM ID='Cube013'
-      SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc',
-        'Blue bc'
-      BINARY_FILE='New GEOM.005.bingeom' /
+&GEOM ID='Cube013' SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc',
+      'Dark blue bc','Blue bc' BINARY_FILE='New GEOM.005.bingeom' /
 ! GEOM Vertices: 24 | Faces: 36
-&GEOM ID='Cube021'
-      SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc',
-        'Blue bc'
-      BINARY_FILE='New GEOM.006.bingeom' /
+&GEOM ID='Cube021' SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc',
+      'Dark blue bc','Blue bc' BINARY_FILE='New GEOM.006.bingeom' /
 ! GEOM Vertices: 24 | Faces: 36
-&GEOM ID='Cube022'
-      SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc',
-        'Blue bc'
-      BINARY_FILE='New GEOM.007.bingeom' /
+&GEOM ID='Cube022' SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc',
+      'Dark blue bc','Blue bc' BINARY_FILE='New GEOM.007.bingeom' /
 ! GEOM Vertices: 24 | Faces: 36
-&GEOM ID='Cube023'
-      SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc',
-        'Blue bc'
-      BINARY_FILE='New GEOM.008.bingeom' /
+&GEOM ID='Cube023' SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc',
+      'Dark blue bc','Blue bc' BINARY_FILE='New GEOM.008.bingeom' /
 ! GEOM Vertices: 24 | Faces: 36
-&GEOM ID='Cube031'
-      SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc',
-        'Blue bc'
-      BINARY_FILE='New GEOM.009.bingeom' /
+&GEOM ID='Cube031' SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc',
+      'Dark blue bc','Blue bc' BINARY_FILE='New GEOM.009.bingeom' /
 ! GEOM Vertices: 24 | Faces: 36
-&GEOM ID='Cube032'
-      SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc',
-        'Blue bc'
-      BINARY_FILE='New GEOM.010.bingeom' /
+&GEOM ID='Cube032' SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc',
+      'Dark blue bc','Blue bc' BINARY_FILE='New GEOM.010.bingeom' /
 ! GEOM Vertices: 24 | Faces: 36
-&GEOM ID='Cube033'
-      SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc',
-        'Blue bc'
-      BINARY_FILE='New GEOM.011.bingeom' /
+&GEOM ID='Cube033' SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc',
+      'Dark blue bc','Blue bc' BINARY_FILE='New GEOM.011.bingeom' /
 ! MESH Cell Qty: 1000
 ! Cell Size: 0.400m · 0.400m · 0.400m | Aspect: 1.0 | Poisson: Yes
 &MESH ID='Domain' IJK=10,10,10

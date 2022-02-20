@@ -15,15 +15,11 @@
 
 ! --- Geometric namelists from Blender Collections
 ! GEOM Vertices: 24 | Faces: 36
-&GEOM ID='Cube001'
-      SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc',
-        'Blue bc'
-      BINARY_FILE='New GEOM.bingeom' /
+&GEOM ID='Cube001' SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc',
+      'Dark blue bc','Blue bc' BINARY_FILE='New GEOM.bingeom' /
 ! GEOM Vertices: 24 | Faces: 36
-&GEOM ID='Cube002'
-      SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc','Dark blue bc',
-        'Blue bc'
-      BINARY_FILE='New GEOM.001.bingeom' /
+&GEOM ID='Cube002' SURF_ID='Dark red bc','Red bc','Dark green bc','Green bc',
+      'Dark blue bc','Blue bc' BINARY_FILE='New GEOM.001.bingeom' /
 ! MESH Cell Qty: 1000
 ! Cell Size: 0.400m · 0.400m · 0.400m | Aspect: 1.0 | Poisson: Yes
 &MESH ID='Domain' IJK=10,10,10
