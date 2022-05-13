@@ -1,4 +1,5 @@
 import os, difflib, filecmp
+from pathlib import Path
 from .testing import TestFail, TestOk
 
 
@@ -9,13 +10,17 @@ def _diff_txt_file(ref_filepath, txt_filepath) -> str:
     with open(ref_filepath, "r") as f0, open(txt_filepath, "r") as f1:
         ref_lines = f0.read().splitlines()
         txt_lines = f1.read().splitlines()
-    log = str()
-    for l in difflib.unified_diff(ref_lines, txt_lines, n=0):
-        # Remove header
-        if l[:3] in ("---", "+++", "@@ ") or l[1:4] == "!!!":
+    log = list()
+    for l in difflib.Differ().compare(ref_lines, txt_lines):
+        if (
+            l.startswith("?")
+            or l.startswith(" ")
+            or l.startswith("- !")
+            or l.startswith("+ !")
+        ):
             continue
-        log += f"\n{l}"
-    return log
+        log.append(l)
+    return "\n".join(log)
 
 
 def compare_paths(package, ref_path, path) -> list:
@@ -23,6 +28,9 @@ def compare_paths(package, ref_path, path) -> list:
     Compare two paths recursively.
     """
     results = list()
+
+    # If not ref_path exists, create
+    Path(ref_path).mkdir(parents=True, exist_ok=True)
 
     # Check same files
     name = f"Compare files: <{ref_path}>"

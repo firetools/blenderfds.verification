@@ -1,5 +1,5 @@
 &HEAD CHID='mesh_mult' /
-&TIME T_END=1.0 /
+&TIME T_END=0.1 /
 
 &MULT ID='mesh_00_mult' /
 &MESH ID='mesh_00' IJK=4,5,6, XB=0.0,1.0,0.0,1.0,0.0,1.0, MULT_ID='mesh_00_mult' /
@@ -26,7 +26,7 @@
 &MESH ID='mesh_11' IJK=4,5,6, XB=0.0,1.0,0.0,1.0,0.0,1.0, MULT_ID='mesh_11_mult' /
 
 &MULT ID='mesh_12_mult' 
-      DX0=10. DX=1. I_LOWER=0 I_UPPER=3
+      DX0=10. DY0=5. DX=1. I_LOWER=0 I_UPPER=3
       DY=1. J_LOWER=0 J_LOWER_SKIP=2 J_UPPER=3 /
 &MESH ID='mesh_12' IJK=4,5,6, XB=0.0,1.0,0.0,1.0,0.0,1.0, MULT_ID='mesh_12_mult' /
 

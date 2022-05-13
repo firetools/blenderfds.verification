@@ -54,7 +54,7 @@ def fds_case_to_blend(
     run_fds=False,
 ):
     results = list()
-
+    print(f"fds_case_to_blend: {filepath}")
     # New blend file with one new scene only
     open_blend_file(filepath=None)  # new file
     old_scs = bpy.data.scenes[:]  # get existing scenes
@@ -164,6 +164,7 @@ def blend_to_fds(
     run_fds=False,
 ):
     results = list()
+    print(f"blend_to_fds: {filepath}")
 
     # Open blend file
     open_blend_file(filepath=filepath)

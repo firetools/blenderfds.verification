@@ -9,7 +9,7 @@ from lib.bl_io import blend_tree_to_fds
 BL_PATH = "./bl/"
 EXCLUDE_DIRS = None
 EXCLUDE_FILES = None
-REF_PATH = "./ref/"
+REF_PATH = "./bl_ref/"
 
 
 def run():

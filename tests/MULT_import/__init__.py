@@ -10,7 +10,7 @@ from lib.bl_io import fds_tree_to_blend
 FDS_PATH = "./fds/"
 EXCLUDE_DIRS = None
 EXCLUDE_FILES = None
-REF_PATH = "./ref/"
+REF_PATH = "./fds_ref/"
 
 
 def run():

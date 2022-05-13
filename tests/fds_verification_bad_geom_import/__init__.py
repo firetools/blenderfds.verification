@@ -13,21 +13,24 @@ FDS_PATH = "../../../firemodels/fds/Verification/Complex_Geometry/"
 BAD_FILES = (
     (
         "geom_bad_open_surface.fds",
-        "Cube_open: Bad geometry: Non manifold or open geometry detected (4 edges).",
+        "ERR: Cube_open: Bad geometry: Non manifold or open geometry detected (4 edges).",
     ),
     (
         "geom_bad_non_manifold_edge.fds",
-        "Cube_non_manifold_edge: Bad geometry: Non manifold vertices detected (2 vertices).",
+        "ERR: Cube_non_manifold_edge: Bad geometry: Non manifold vertices detected (2 vertices).",
     ),
     (
         "geom_bad_inconsistent_normals.fds",
-        "Cube_inconsistent_normals: Bad geometry: Inconsistent face normals detected (4 edges).",
+        "ERR: Cube_inconsistent_normals: Bad geometry: Inconsistent face normals detected (4 edges).",
     ),
     (
         "geom_bad_non_manifold_vert.fds",
-        "Cube_non_manifold_vert: Bad geometry: Non manifold vertices detected (2 vertices).",
+        "ERR: Cube_non_manifold_vert: Bad geometry: Non manifold vertices detected (2 vertices).",
     ),
-    ("geom_bad_inverted_normals.fds", "Message!"),  # FIXME this should break
+    (
+        "geom_bad_inverted_normals.fds",
+        "ERR: Cube_inverted_normals: Bad geometry: Inverted face normals detected.",
+    ),
 )
 
 # BlenderFDS imports bad geometry, but raises BFException on export

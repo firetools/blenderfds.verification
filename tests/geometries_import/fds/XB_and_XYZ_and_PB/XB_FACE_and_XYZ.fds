@@ -1,0 +1,16 @@
+&HEAD CHID='XB_FACE_and_XYZ' /
+&TIME T_END=1.0 /
+
+&SURF ID='Red bc' RGB=255,0,0 /
+&SURF ID='Green bc' RGB=0,255,0 /
+&SURF ID='Blue bc' RGB=0,0,255 /
+&SURF ID='Dark red bc' RGB=50,0,0 /
+&SURF ID='Dark green bc' RGB=0,50,0 /
+&SURF ID='Dark blue bc' RGB=0,0,50 /
+
+&MESH ID='Domain' IJK=10,10,10 XB=-2.0,2.0,-2.0,2.0,-2.0,2.0 /
+
+&VENT XB=-1.0,1.0,-1.0,1.0,-2.0,-2.0 XYZ=0.0,0.0,-1.0
+      SURF_ID='Blue bc' /
+
+&TAIL /

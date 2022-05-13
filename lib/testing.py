@@ -14,6 +14,7 @@ def run_tests(test_py_module, requested_test_names=None):
     print("  " + "\n  ".join(tests))
     print(f"{HEADER}Requested tests:{ENDC}")
     print("  " + "\n  ".join(requested_test_names or ("all",)))
+
     # Run
     results = list()
     for key, item in tests.items():
@@ -28,6 +29,7 @@ def run_tests(test_py_module, requested_test_names=None):
             results.extend(rs)
         else:
             raise Exception(f"<{item}> is sending bad result <{rs}>")
+            
     # Classify failed by test
     packages = dict()
     for r in results:
