@@ -30,7 +30,7 @@ try:
 except ImportError:
     pass
 
-BLENDER_PATHFILE = "blender"
+BLENDER_PATHFILE = "./blender"
 TEST_PY_MODULE = "tests"
 
 if __name__ == "__main__":
