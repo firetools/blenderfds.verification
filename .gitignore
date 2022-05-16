@@ -1,6 +1,7 @@
 log
 
 # Blender
+blender
 *.blend1
 
 # Byte-compiled / optimized / DLL files
