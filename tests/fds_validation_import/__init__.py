@@ -6,8 +6,14 @@ import os
 from lib.bl_io import fds_tree_to_blend
 
 FDS_PATH = "../../../firemodels/fds/Validation/"
-EXCLUDE_DIRS = ("Crown_Fires",)
-EXCLUDE_FILES = None
+EXCLUDE_DIRS = (
+    "Crown_Fires",
+)
+EXCLUDE_FILES = (
+    "free_conv_sphere_1_16.fds",
+    "free_conv_sphere_1_8.fds",
+    "Askervein_TU03A_16m.fds",
+)
 
 
 def run():

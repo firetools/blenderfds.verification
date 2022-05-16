@@ -4,7 +4,7 @@
 --- Case from Blender Scene: <NIST_20MW_Burner> | View Layer: <RenderLayer>
 
 --- Boundary conditions from Blender Materials
-&SURF ID='Burner' RGB=204,0,0 HRRPUA=100.000 /
+&SURF ID='Burner' RGB=204,0,0 HRRPUA=100.0 /
 &SURF ID='Corrug Steel' RGB=207,207,207 /
 &SURF ID='Steel' RGB=35,35,35 /
 
