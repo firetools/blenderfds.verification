@@ -4,6 +4,7 @@ Test exporting all kind of geometries (eg. GEOM, GEOM terrain, XB, XYZ, PB).
 
 import os
 from lib.bl_io import blend_tree_to_fds
+from lib import config
 
 BL_PATH = "./bl/"
 BL_EXCLUDE_DIRS = None
@@ -19,5 +20,6 @@ def run():
         exclude_dirs=BL_EXCLUDE_DIRS,
         exclude_files=BL_EXCLUDE_FILES,
         ref_path=os.path.join(current_path, BL_REF_PATH),
-        run_fds=True,
+        run_fds=config.RUN_FDS,
+        set_ref=config.SET_REF,
     )

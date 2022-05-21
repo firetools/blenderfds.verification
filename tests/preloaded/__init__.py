@@ -3,6 +3,7 @@ Test this verification suite
 """
 
 import lib
+from lib import config
 
 
 def run():

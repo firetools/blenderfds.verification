@@ -5,6 +5,7 @@ from Blender files to fds, and compare the result with a reference.
 
 import os
 from lib.bl_io import blend_tree_to_fds
+from lib import config
 
 BL_PATH = "../../../firemodels/cad/"  # blend tree
 EXCLUDE_DIRS = None
@@ -21,4 +22,5 @@ def run():
         exclude_files=EXCLUDE_FILES,
         ref_path=os.path.join(current_path, REF_PATH),
         run_fds=False,
+        set_ref=config.SET_REF,
     )

@@ -5,6 +5,7 @@ Test importing official FDS verification suite cases related to bad Complex Geom
 import os, sys, bpy
 from lib import TestFail, TestOk
 from lib.bl_io import fds_case_to_blend
+from lib import config
 
 # BlenderFDS = sys.modules["blenderfds"]
 # ERR = BlenderFDS.types.BFException
@@ -48,6 +49,7 @@ def run():
                 to_fds_expected_msg=expected_msg,
                 ref_path=None,
                 run_fds=False,
+                set_ref=config.SET_REF,
             )
         )
     return results

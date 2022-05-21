@@ -4,15 +4,13 @@ Test importing all official FDS validation suite cases to Blender files.
 
 import os
 from lib.bl_io import fds_tree_to_blend
+from lib import config
 
 FDS_PATH = "../../../firemodels/fds/Validation/"
-EXCLUDE_DIRS = (
-    "Crown_Fires",
-)
+EXCLUDE_DIRS = ("Crown_Fires",)
 EXCLUDE_FILES = (
     "free_conv_sphere_1_16.fds",
     "free_conv_sphere_1_8.fds",
-    "Askervein_TU03A_16m.fds",
 )
 
 
@@ -23,4 +21,5 @@ def run():
         path=os.path.join(current_path, FDS_PATH),
         exclude_dirs=EXCLUDE_DIRS,
         exclude_files=EXCLUDE_FILES,
+        set_ref=config.SET_REF,
     )

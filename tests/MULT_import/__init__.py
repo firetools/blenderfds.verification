@@ -6,6 +6,7 @@ and compare the result with a reference.
 
 import os
 from lib.bl_io import fds_tree_to_blend
+from lib import config
 
 FDS_PATH = "./fds/"
 EXCLUDE_DIRS = None
@@ -21,5 +22,6 @@ def run():
         exclude_dirs=EXCLUDE_DIRS,
         exclude_files=EXCLUDE_FILES,
         ref_path=os.path.join(current_path, REF_PATH),
-        run_fds=True,
+        run_fds=config.RUN_FDS,
+        set_ref=config.SET_REF,
     )

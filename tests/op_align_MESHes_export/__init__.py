@@ -4,6 +4,7 @@ Test aligning MESHes by operator.
 
 import os
 from lib.bl_io import blend_to_fds
+from lib import config
 
 BL_FILEPATH = "./bl/align_meshes.blend"
 SCRIPT = """
@@ -23,7 +24,8 @@ def run():
             filepath=os.path.join(current_path, BL_FILEPATH),
             script=SCRIPT,
             ref_path=os.path.join(current_path, BL_REF_PATH),
-            run_fds=True,
+            run_fds=config.RUN_FDS,
+            set_ref=config.SET_REF,
         )
     )
     return results

@@ -4,6 +4,7 @@ Test copy FDS paramters by operator.
 
 import os
 from lib.bl_io import blend_to_fds
+from lib import config
 
 BL_FILEPATH_SCENE = "./bl/copy_scene.blend"
 SCRIPT_SCENE = """
@@ -25,7 +26,7 @@ BL_REF_PATH = "./bl_ref/"
 def run():
     current_path = os.path.dirname(os.path.abspath(__file__))
     results = list()
-    
+
     results.extend(  # Run scene script and export
         blend_to_fds(
             package=__package__,
@@ -33,9 +34,10 @@ def run():
             script=SCRIPT_SCENE,
             ref_path=os.path.join(current_path, BL_REF_PATH),
             run_fds=False,
+            set_ref=config.SET_REF,
         )
     )
-    
+
     results.extend(  # Run obs script and export
         blend_to_fds(
             package=__package__,
@@ -43,7 +45,8 @@ def run():
             script=SCRIPT_OBJECTS,
             ref_path=os.path.join(current_path, BL_REF_PATH),
             run_fds=False,
+            set_ref=config.SET_REF,
         )
     )
-    
+
     return results

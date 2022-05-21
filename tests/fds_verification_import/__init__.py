@@ -4,9 +4,10 @@ Test importing official FDS verification suite cases except Complex Geometries t
 
 import os
 from lib.bl_io import fds_tree_to_blend
+from lib import config
 
 FDS_CASES_PATH = "../../../firemodels/fds/Verification/"
-EXCLUDE_DIRS = ("Complex_Geometry","Heat_Transfer","Miscellaneous")
+EXCLUDE_DIRS = ("Complex_Geometry", "Heat_Transfer", "Miscellaneous")
 EXCLUDE_FILES = (
     "ht3d_sphere_51.fds",
     "ht3d_sphere_50.fds",
@@ -22,8 +23,9 @@ EXCLUDE_FILES = (
     "Morvan_TGA.fds",
     "part_baking_soda_450K.fds",
     "part_baking_soda_500K.fds",
-    "part_baking_soda_420K.fds"
+    "part_baking_soda_420K.fds",
 )
+
 
 def run():
     current_path = os.path.dirname(os.path.abspath(__file__))
@@ -32,4 +34,5 @@ def run():
         path=os.path.join(current_path, FDS_CASES_PATH),
         exclude_dirs=EXCLUDE_DIRS,
         exclude_files=EXCLUDE_FILES,
+        set_ref=config.SET_REF,
     )

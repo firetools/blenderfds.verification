@@ -4,6 +4,7 @@ Test importing official FDS verification suite cases related to good Complex Geo
 
 import os
 from lib.bl_io import fds_tree_to_blend
+from lib import config
 
 FDS_CASES_PATH = "../../../firemodels/fds/Verification/Complex_Geometry/"
 EXCLUDE_DIRS = None
@@ -30,7 +31,7 @@ EXCLUDE_FILES = (
     "geom_elev.fds",
     "sphere_cc_compute.fds",
     "geom_azim.fds",
-    "sphere_leak.fds", 
+    "sphere_leak.fds",
 )
 
 
@@ -41,4 +42,5 @@ def run():
         path=os.path.join(current_path, FDS_CASES_PATH),
         exclude_dirs=EXCLUDE_DIRS,
         exclude_files=EXCLUDE_FILES,
+        set_ref=config.SET_REF,
     )
