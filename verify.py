@@ -23,7 +23,7 @@ Automatic verification script for continous integration.
 import sys, os
 
 sys.path.insert(0, os.path.dirname(__file__))
-from lib import run_blender, testing
+from lib import run_blender, testing, config
 
 try:
     import bpy
@@ -34,8 +34,16 @@ BLENDER_PATHFILE = "./blender"
 TEST_PY_MODULE = "tests"
 
 if __name__ == "__main__":
+
     run_blender.run_script_in_blender(
         script_pathfile=os.path.abspath(__file__),  # myself
         blender_pathfile=BLENDER_PATHFILE,
     )
-    testing.run_tests(test_py_module=TEST_PY_MODULE, requested_test_names=sys.argv[5:])
+
+    confirm = "Y"
+    if config.SET_REF:
+        confirm = input("\n\nWARNING: Setting references, are you sure? (Y/N) ")
+    if confirm in ("Y", "y"):
+        testing.run_tests(
+            test_py_module=TEST_PY_MODULE, requested_test_names=sys.argv[5:]
+        )

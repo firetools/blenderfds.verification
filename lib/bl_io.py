@@ -1,4 +1,4 @@
-import os, bpy, tempfile
+import os, bpy, tempfile, shutil
 from . import compare, run_command
 from .testing import TestFail, TestOk, TestException
 
@@ -20,7 +20,13 @@ class FakeException(Exception):
 
 
 def fds_tree_to_blend(
-    package, path, exclude_dirs=None, exclude_files=None, ref_path=None, run_fds=False
+    package,
+    path,
+    exclude_dirs=None,
+    exclude_files=None,
+    ref_path=None,
+    run_fds=False,
+    set_ref=False,
 ):
     """!
     Import all fds files from dir tree to Blender.
@@ -40,6 +46,7 @@ def fds_tree_to_blend(
                         filepath=filepath,
                         ref_path=ref_path,
                         run_fds=run_fds,
+                        set_ref=set_ref,
                     )
                 )
     return results
@@ -52,6 +59,7 @@ def fds_case_to_blend(
     to_fds_expected_msg=None,
     ref_path=None,
     run_fds=False,
+    set_ref=False,
 ):
     results = list()
     print(f"fds_case_to_blend: {filepath}")
@@ -97,6 +105,7 @@ def fds_case_to_blend(
                 expected_msg=to_fds_expected_msg,
                 ref_path=ref_path,
                 run_fds=run_fds,
+                set_ref=set_ref,
             )
         )
 
@@ -107,7 +116,13 @@ def fds_case_to_blend(
 
 
 def blend_tree_to_fds(
-    package, path, exclude_dirs=None, exclude_files=None, ref_path=None, run_fds=False
+    package,
+    path,
+    exclude_dirs=None,
+    exclude_files=None,
+    ref_path=None,
+    run_fds=False,
+    set_ref=False,
 ):
     """!
     Export all blend files from dir tree to fds.
@@ -127,6 +142,7 @@ def blend_tree_to_fds(
                         filepath=filepath,
                         ref_path=ref_path,
                         run_fds=run_fds,
+                        set_ref=set_ref,
                     )
                 )
     return results
@@ -162,6 +178,7 @@ def blend_to_fds(
     expected_msg=None,
     ref_path=None,
     run_fds=False,
+    set_ref=False,
 ):
     results = list()
     print(f"blend_to_fds: {filepath}")
@@ -224,6 +241,13 @@ def blend_to_fds(
                         path=fds_path,
                     )
                 )
+
+                # If requested, copy over /ref/filename.blend/scene/
+                if set_ref:
+                    print(f"Setting ref: {ref_sc_path}")
+                    if os.path.exists(path=ref_sc_path):
+                        shutil.rmtree(path=ref_sc_path)
+                    shutil.copytree(src=fds_path, dst=ref_sc_path)
 
             # Run fds on result
             if run_fds:
