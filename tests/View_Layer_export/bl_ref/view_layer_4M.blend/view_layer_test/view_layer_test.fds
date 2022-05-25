@@ -6,8 +6,7 @@
 
 &HEAD CHID='view_layer_test' TITLE='Testing view layer selection of collections' /
 &TIME T_END=1.0 /
-&REAC ID='Example' FUEL='PROPANE' CO_YIELD=0.010 SOOT_YIELD=0.020
-      HEAT_OF_COMBUSTION=46420.0 /
+&REAC FUEL='PROPANE' CO_YIELD=0.010 SOOT_YIELD=0.020 HEAT_OF_COMBUSTION=46420.0 /
 
 --- Free text from Blender Text: <Text>
 
