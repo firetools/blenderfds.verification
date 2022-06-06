@@ -7,9 +7,6 @@
 
 --- Boundary conditions from Blender Materials
 
-&SURF ID='Dummy Color1' RGB=255,255,255 TRANSPARENCY=0.050 /
-&SURF ID='Dummy Color2' RGB=255,255,0 TRANSPARENCY=0.050 /
-&SURF ID='Dummy Color3' RGB=255,0,255 TRANSPARENCY=0.050 /
 &SURF ID='Material' RGB=204,204,204 /
 &SURF ID='Pool' RGB=50,81,204 /
 

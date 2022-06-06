@@ -14,10 +14,6 @@ Insert here other non-geometrical namelists
 &BNDF QUANTITY='WALL TEMPERATURE' /
 &BNDF QUANTITY='BURNING RATE' /
 
---- Boundary conditions from Blender Materials
-
-&SURF ID='Example bc' RGB=204,166,111 /
-
 --- Computational domain | MPI Processes: 1 | MESH Qty: 3 | Cell Qty: 8000
 
 -- MPI Process: <0> | MESH Qty: 3 | Cell Qty: 8000
