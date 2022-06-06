@@ -60,6 +60,7 @@ def fds_case_to_blend(
     ref_path=None,
     run_fds=False,
     set_ref=False,
+    keep_default=False,
 ):
     results = list()
     print(f"fds_case_to_blend: {filepath}")
@@ -67,8 +68,9 @@ def fds_case_to_blend(
     open_blend_file(filepath=None)  # new file
     old_scs = bpy.data.scenes[:]  # get existing scenes
     sc = bpy.data.scenes.new("scene_tmp")  # get new scene
-    for old_sc in old_scs:  # rm existing scenes
-        bpy.data.scenes.remove(old_sc, do_unlink=True)
+    if not keep_default:
+        for old_sc in old_scs:  # rm existing scenes
+            bpy.data.scenes.remove(old_sc, do_unlink=True)
 
     context = bpy.context
 
