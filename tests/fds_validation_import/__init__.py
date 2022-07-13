@@ -7,7 +7,7 @@ from lib.bl_io import fds_tree_to_blend
 from lib import config
 
 FDS_PATH = "../../../firemodels/fds/Validation/"
-EXCLUDE_DIRS = ("Crown_Fires",)
+EXCLUDE_DIRS = ("Crown_Fires","NIST_Pool_Fires","FAA_Cargo_Compartments")
 EXCLUDE_FILES = (
     "free_conv_sphere_1_16.fds",
     "free_conv_sphere_1_8.fds",
