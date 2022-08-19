@@ -1,8 +1,9 @@
 # BlenderFDS verification repository
 
-![](https://github.com/firetools/blenderfds/wiki/images/logo.png)
+![](https://github.com/firetools/blenderfds/wiki/p/web/logo.png)
 
-This is the repository of verification tools for *BlenderFDS*. Find the main repository at [BlenderFDS repo](https://github.com/firetools/blenderfds).
+This is the repository of verification tools for *BlenderFDS*.
+Find the main repository at [BlenderFDS repo](https://github.com/firetools/blenderfds).
 
 ## How to verify the code
 
